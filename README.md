@@ -54,7 +54,7 @@ Open the port in your firewall if needed, e.g. `sudo ufw allow 8080/tcp`.
 
 ## Features
 
-- 7 maps: The Yard, Foundry, Cryo Deck, District 9, Reactor, Outpost, The Vault (five unlock by reaching waves 3, 5, 7, 9 and 11 in Survival; Settings has an unlock-all switch)
+- 7 maps, each with its own textures, sky, scenery, weather and lighting: The Yard (dusk shipyard), Foundry (steelworks), Cryo Deck (ice shelf under an aurora), District 9 (neon city in the rain), Reactor (energy core), Outpost (desert fort at noon), The Vault (indoor server hall)
 - Jump pads, sliding cover, lava, explosive barrels, and doors that swap the layout each wave
 - 2 modes: Survival (endless waves) and Blitz (3-minute score attack)
 - 5 weapons, each with an upgrade dropped by bosses, plus melee and grenades
