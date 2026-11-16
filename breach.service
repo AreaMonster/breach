@@ -7,6 +7,9 @@ After=network.target
 WorkingDirectory=/opt/breach
 ExecStart=/usr/bin/node /opt/breach/server.js
 Environment=PORT=8080
+# Leaderboard file; systemd creates /var/lib/breach owned by the service user
+StateDirectory=breach
+Environment=SCORES_FILE=/var/lib/breach/scores.json
 User=www-data
 Restart=on-failure
 NoNewPrivileges=true

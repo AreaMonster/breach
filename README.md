@@ -15,7 +15,7 @@ node server.js              # http://<server-ip>:8080
 PORT=3000 node server.js    # different port
 ```
 
-Without Node:
+Without Node (no leaderboard):
 
 ```bash
 python3 -m http.server 8080
@@ -44,22 +44,36 @@ server {
 
 Open the port in your firewall if needed, e.g. `sudo ufw allow 8080/tcp`.
 
+## Leaderboard
+
+`server.js` keeps a top-50 list per map and mode and the game shows it on the menu and after each run. Set your name under Settings → Callsign.
+
+- Scores are stored in `data/scores.json` (override with `SCORES_FILE=/path/scores.json`). The systemd unit uses `/var/lib/breach/scores.json`.
+- The leaderboard only appears when the game is served by `server.js`. With `python3 -m http.server` or plain nginx file serving it stays hidden; proxy nginx to the Node server instead (`proxy_pass http://127.0.0.1:8080;`).
+- Scores are reported by the browser, so they can be faked. The server only validates format, rate-limits submissions and rejects implausible values.
+
 ## Features
 
-- 4 maps: The Yard, Foundry, Cryo Deck, District 9
-- 5 weapons: pistol, rifle, shotgun, rocket launcher, Arc Lance
-- 7 enemy types including flying drones, bombers and a boss every 5th wave
-- Stackable upgrades after every wave
-- Explosive barrels, 3 difficulty levels, best score per map
+- 7 maps: The Yard, Foundry, Cryo Deck, District 9, Reactor, Outpost, The Vault (five unlock by reaching waves 3, 5, 7, 9 and 11 in Survival; Settings has an unlock-all switch)
+- Jump pads, sliding cover, lava, explosive barrels, and doors that swap the layout each wave
+- 2 modes: Survival (endless waves) and Blitz (3-minute score attack)
+- 5 weapons, each with an upgrade dropped by bosses, plus melee and grenades
+- 9 enemy types, shielded elites, and 3 bosses that rotate every 5th wave
+- Wave modifiers (Swarm, Low Gravity, Bomb Squad, Blackout, Armored)
+- Stackable upgrades after every wave, including rare ones
+- Dash, slide, double jump, 3 difficulty levels
+- Settings: sensitivity, FOV, volume, graphics quality, key rebinding
 
-## Controls
+## Controls (defaults, all rebindable)
 
 | Action | Key |
 | --- | --- |
 | Move | WASD |
 | Look / fire / aim | Mouse / LMB / RMB |
-| Sprint | Shift |
+| Sprint | Left Shift |
 | Jump | Space |
+| Dash / slide | Q / C |
+| Melee / grenade | V / G |
 | Reload | R |
 | Weapons | 1–5 or mouse wheel |
 | Pick upgrade | 1 2 3 |
