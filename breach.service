@@ -1,0 +1,17 @@
+[Unit]
+Description=BREACH browser FPS
+After=network.target
+
+[Service]
+# Adjust the path and user to match your install
+WorkingDirectory=/opt/breach
+ExecStart=/usr/bin/node /opt/breach/server.js
+Environment=PORT=8080
+User=www-data
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

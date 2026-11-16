@@ -1,10 +1,48 @@
 # BREACH
 
-Arena survival FPS that runs in the browser. Single HTML file, no build step.
+Arena survival FPS that runs in the browser. No build step, no dependencies.
 
-## Play
+## Run on a Linux server
 
-Open `index.html` in a desktop browser (it loads three.js from cdnjs, so you need to be online), or host the repo with GitHub Pages.
+Everything is static and self-contained (three.js is bundled in `vendor/`), so any web server works.
+
+Quickest, with Node (no dependencies):
+
+```bash
+git clone https://github.com/AreaMonster/breach.git
+cd breach
+node server.js              # http://<server-ip>:8080
+PORT=3000 node server.js    # different port
+```
+
+Without Node:
+
+```bash
+python3 -m http.server 8080
+```
+
+Run it as a service (edit the paths in `breach.service` first):
+
+```bash
+sudo cp -r . /opt/breach
+sudo cp breach.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now breach
+```
+
+Behind nginx, either proxy to the Node server or serve the folder directly:
+
+```nginx
+server {
+    listen 80;
+    server_name breach.example.com;
+    root /opt/breach;
+    index index.html;
+    location ~ /\. { deny all; }
+}
+```
+
+Open the port in your firewall if needed, e.g. `sudo ufw allow 8080/tcp`.
 
 ## Features
 
